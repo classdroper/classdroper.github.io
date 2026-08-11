@@ -66,6 +66,7 @@
             border-radius: 20px;
             color: #3B82F6;
             font-weight: bold;
+            cursor: pointer;
         }
 
         .account-icon {
@@ -97,60 +98,63 @@
             margin-top: 10px;
         }
 
-        /* Modal (popup for login/signup) */
-        .modal-overlay {
+        /* Full screen page (login/signup) */
+        .fullpage {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
             background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 300px;
+            z-index: 100;
         }
 
-        .modal h2 {
-            margin-top: 0;
+        .fullpage.active {
+            display: block;
+        }
+
+        .fullpage-top {
+            padding: 20px 30px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 1rem;
             color: #3B82F6;
+            cursor: pointer;
         }
 
-        .modal input {
+        .fullpage-content {
+            max-width: 350px;
+            margin: 40px auto 0 auto;
+            padding: 0 20px;
+        }
+
+        .fullpage-content h2 {
+            color: #3B82F6;
+            font-size: 2rem;
+        }
+
+        .fullpage-content input {
             width: 100%;
-            padding: 10px;
-            margin-bottom: 12px;
+            padding: 12px;
+            margin-bottom: 14px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 1rem;
         }
 
-        .modal button {
+        .fullpage-content button.submit-btn {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background-color: #3B82F6;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-        }
-
-        .modal .close-btn {
-            background: none;
-            color: #999;
-            width: auto;
-            float: right;
-            padding: 0;
-            font-size: 1.2rem;
+            font-size: 1rem;
         }
 
         .error-text {
@@ -165,8 +169,8 @@
     <nav>
         <div class="logo">ClassDroper</div>
         <div class="nav-buttons" id="navButtons">
-            <button class="btn btn-login" onclick="openModal('login')">Login</button>
-            <button class="btn btn-signup" onclick="openModal('signup')">Sign Up</button>
+            <button class="btn btn-login" onclick="openPage('login')">Login</button>
+            <button class="btn btn-signup" onclick="openPage('signup')">Sign Up</button>
         </div>
     </nav>
 
@@ -175,38 +179,42 @@
         <p>Order what you need, a drone delivers it straight to your classroom door.</p>
     </div>
 
-    <!-- Sign Up Modal -->
-    <div class="modal-overlay" id="signupModal">
-        <div class="modal">
-            <button class="close-btn" onclick="closeModal('signup')">&times;</button>
+    <!-- Sign Up Full Page -->
+    <div class="fullpage" id="signupPage">
+        <div class="fullpage-top">
+            <button class="back-btn" onclick="closePage('signup')">&larr; Back to home</button>
+        </div>
+        <div class="fullpage-content">
             <h2>Sign Up</h2>
             <div class="error-text" id="signupError"></div>
             <input type="text" id="signupName" placeholder="Full Name">
             <input type="email" id="signupEmail" placeholder="Email">
             <input type="password" id="signupPassword" placeholder="Password">
-            <button onclick="signUp()">Create Account</button>
+            <button class="submit-btn" onclick="signUp()">Create Account</button>
         </div>
     </div>
 
-    <!-- Login Modal -->
-    <div class="modal-overlay" id="loginModal">
-        <div class="modal">
-            <button class="close-btn" onclick="closeModal('login')">&times;</button>
+    <!-- Login Full Page -->
+    <div class="fullpage" id="loginPage">
+        <div class="fullpage-top">
+            <button class="back-btn" onclick="closePage('login')">&larr; Back to home</button>
+        </div>
+        <div class="fullpage-content">
             <h2>Login</h2>
             <div class="error-text" id="loginError"></div>
             <input type="email" id="loginEmail" placeholder="Email">
             <input type="password" id="loginPassword" placeholder="Password">
-            <button onclick="logIn()">Login</button>
+            <button class="submit-btn" onclick="logIn()">Login</button>
         </div>
     </div>
 
     <script>
-        function openModal(type) {
-            document.getElementById(type + 'Modal').classList.add('active');
+        function openPage(type) {
+            document.getElementById(type + 'Page').classList.add('active');
         }
 
-        function closeModal(type) {
-            document.getElementById(type + 'Modal').classList.remove('active');
+        function closePage(type) {
+            document.getElementById(type + 'Page').classList.remove('active');
         }
 
         function getUsers() {
@@ -241,7 +249,7 @@
 
             localStorage.setItem('classdroperCurrentUser', JSON.stringify({ fullName: name, email: email }));
 
-            closeModal('signup');
+            closePage('signup');
             updateNav();
         }
 
@@ -260,7 +268,7 @@
 
             localStorage.setItem('classdroperCurrentUser', JSON.stringify({ fullName: match.fullName, email: match.email }));
 
-            closeModal('login');
+            closePage('login');
             updateNav();
         }
 
@@ -284,8 +292,8 @@
                 `;
             } else {
                 navButtons.innerHTML = `
-                    <button class="btn btn-login" onclick="openModal('login')">Login</button>
-                    <button class="btn btn-signup" onclick="openModal('signup')">Sign Up</button>
+                    <button class="btn btn-login" onclick="openPage('login')">Login</button>
+                    <button class="btn btn-signup" onclick="openPage('signup')">Sign Up</button>
                 `;
             }
         }
