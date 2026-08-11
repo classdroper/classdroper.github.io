@@ -16,7 +16,6 @@
             background-color: #F9FAFB;
         }
 
-        /* Nav bar */
         nav {
             display: flex;
             justify-content: space-between;
@@ -56,7 +55,6 @@
             color: white;
         }
 
-        /* User bubble (shown after login) */
         .user-bubble {
             display: flex;
             align-items: center;
@@ -81,7 +79,6 @@
             font-size: 0.9rem;
         }
 
-        /* Hero section */
         .hero {
             text-align: center;
             padding: 80px 20px;
@@ -98,7 +95,6 @@
             margin-top: 10px;
         }
 
-        /* Full screen page (login/signup/account) */
         .fullpage {
             display: none;
             position: fixed;
@@ -145,6 +141,11 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 1rem;
+        }
+
+        .fullpage-content input:disabled {
+            background-color: #f0f0f0;
+            color: #888;
         }
 
         .fullpage-content label {
@@ -197,7 +198,6 @@
             font-weight: bold;
         }
 
-        /* Confirm delete overlay */
         .confirm-overlay {
             display: none;
             position: fixed;
@@ -312,10 +312,7 @@
 
             <div class="account-section">
                 <label>Email</label>
-                <input type="email" id="accountEmail">
-                <div class="error-text" id="emailError"></div>
-                <div class="success-text" id="emailSuccess"></div>
-                <button class="submit-btn" onclick="updateEmail()">Update Email</button>
+                <input type="email" id="accountEmail" disabled>
             </div>
 
             <div class="account-section">
@@ -422,8 +419,6 @@
 
             document.getElementById('nameError').textContent = '';
             document.getElementById('nameSuccess').textContent = '';
-            document.getElementById('emailError').textContent = '';
-            document.getElementById('emailSuccess').textContent = '';
             document.getElementById('passwordError').textContent = '';
             document.getElementById('passwordSuccess').textContent = '';
         }
@@ -449,35 +444,6 @@
             localStorage.setItem('classdroperCurrentUser', JSON.stringify({ fullName: newName, email: user.email }));
             successBox.textContent = "Name updated.";
             updateNav();
-        }
-
-        function updateEmail() {
-            const newEmail = document.getElementById('accountEmail').value.trim().toLowerCase();
-            const errorBox = document.getElementById('emailError');
-            const successBox = document.getElementById('emailSuccess');
-            errorBox.textContent = '';
-            successBox.textContent = '';
-
-            if (!newEmail) {
-                errorBox.textContent = "Email cannot be empty.";
-                return;
-            }
-
-            const user = getCurrentUser();
-            const users = getUsers();
-
-            const emailTaken = users.find(u => u.email === newEmail && u.email !== user.email);
-            if (emailTaken) {
-                errorBox.textContent = "That email is already in use.";
-                return;
-            }
-
-            const index = users.findIndex(u => u.email === user.email);
-            users[index].email = newEmail;
-            saveUsers(users);
-
-            localStorage.setItem('classdroperCurrentUser', JSON.stringify({ fullName: user.fullName, email: newEmail }));
-            successBox.textContent = "Email updated.";
         }
 
         function updatePassword() {
