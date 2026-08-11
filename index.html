@@ -98,7 +98,7 @@
             margin-top: 10px;
         }
 
-        /* Full screen page (login/signup) */
+        /* Full screen page (login/signup/account) */
         .fullpage {
             display: none;
             position: fixed;
@@ -108,6 +108,7 @@
             height: 100%;
             background-color: white;
             z-index: 100;
+            overflow-y: auto;
         }
 
         .fullpage.active {
@@ -146,7 +147,13 @@
             font-size: 1rem;
         }
 
-        .fullpage-content button.submit-btn {
+        .fullpage-content label {
+            font-size: 0.85rem;
+            color: #555;
+            font-weight: bold;
+        }
+
+        button.submit-btn {
             width: 100%;
             padding: 12px;
             background-color: #3B82F6;
@@ -155,12 +162,91 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
+            margin-bottom: 25px;
         }
 
         .error-text {
             color: red;
             font-size: 0.85rem;
             margin-bottom: 10px;
+        }
+
+        .success-text {
+            color: green;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        .account-section {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            margin-top: 10px;
+        }
+
+        .delete-btn {
+            display: block;
+            width: 200px;
+            margin: 40px auto;
+            padding: 14px;
+            background-color: #DC2626;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        /* Confirm delete overlay */
+        .confirm-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+        }
+
+        .confirm-overlay.active {
+            display: flex;
+        }
+
+        .confirm-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .confirm-box p {
+            margin-bottom: 20px;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .confirm-buttons button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .confirm-cancel {
+            background-color: #eee;
+        }
+
+        .confirm-delete {
+            background-color: #DC2626;
+            color: white;
         }
     </style>
 </head>
@@ -208,9 +294,59 @@
         </div>
     </div>
 
+    <!-- Account Details Full Page -->
+    <div class="fullpage" id="accountPage">
+        <div class="fullpage-top">
+            <button class="back-btn" onclick="closePage('account')">&larr; Back to home</button>
+        </div>
+        <div class="fullpage-content">
+            <h2>Account Details</h2>
+
+            <div class="account-section">
+                <label>Full Name</label>
+                <input type="text" id="accountName">
+                <div class="error-text" id="nameError"></div>
+                <div class="success-text" id="nameSuccess"></div>
+                <button class="submit-btn" onclick="updateName()">Update Name</button>
+            </div>
+
+            <div class="account-section">
+                <label>Email</label>
+                <input type="email" id="accountEmail">
+                <div class="error-text" id="emailError"></div>
+                <div class="success-text" id="emailSuccess"></div>
+                <button class="submit-btn" onclick="updateEmail()">Update Email</button>
+            </div>
+
+            <div class="account-section">
+                <label>New Password</label>
+                <input type="password" id="accountPassword" placeholder="Enter new password">
+                <div class="error-text" id="passwordError"></div>
+                <div class="success-text" id="passwordSuccess"></div>
+                <button class="submit-btn" onclick="updatePassword()">Update Password</button>
+            </div>
+
+            <button class="delete-btn" onclick="openDeleteConfirm()">Delete Account</button>
+        </div>
+    </div>
+
+    <!-- Delete confirmation popup -->
+    <div class="confirm-overlay" id="deleteConfirm">
+        <div class="confirm-box">
+            <p>Are you sure you want to delete your account?</p>
+            <div class="confirm-buttons">
+                <button class="confirm-cancel" onclick="closeDeleteConfirm()">Cancel</button>
+                <button class="confirm-delete" onclick="deleteAccount()">Delete</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         function openPage(type) {
             document.getElementById(type + 'Page').classList.add('active');
+            if (type === 'account') {
+                loadAccountDetails();
+            }
         }
 
         function closePage(type) {
@@ -224,6 +360,11 @@
 
         function saveUsers(users) {
             localStorage.setItem('classdroperUsers', JSON.stringify(users));
+        }
+
+        function getCurrentUser() {
+            const currentUser = localStorage.getItem('classdroperCurrentUser');
+            return currentUser ? JSON.parse(currentUser) : null;
         }
 
         function signUp() {
@@ -272,22 +413,126 @@
             updateNav();
         }
 
-        function logOut() {
+        function loadAccountDetails() {
+            const user = getCurrentUser();
+            if (!user) return;
+            document.getElementById('accountName').value = user.fullName;
+            document.getElementById('accountEmail').value = user.email;
+            document.getElementById('accountPassword').value = '';
+
+            document.getElementById('nameError').textContent = '';
+            document.getElementById('nameSuccess').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('emailSuccess').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+            document.getElementById('passwordSuccess').textContent = '';
+        }
+
+        function updateName() {
+            const newName = document.getElementById('accountName').value.trim();
+            const errorBox = document.getElementById('nameError');
+            const successBox = document.getElementById('nameSuccess');
+            errorBox.textContent = '';
+            successBox.textContent = '';
+
+            if (!newName) {
+                errorBox.textContent = "Name cannot be empty.";
+                return;
+            }
+
+            const user = getCurrentUser();
+            const users = getUsers();
+            const index = users.findIndex(u => u.email === user.email);
+            users[index].fullName = newName;
+            saveUsers(users);
+
+            localStorage.setItem('classdroperCurrentUser', JSON.stringify({ fullName: newName, email: user.email }));
+            successBox.textContent = "Name updated.";
+            updateNav();
+        }
+
+        function updateEmail() {
+            const newEmail = document.getElementById('accountEmail').value.trim().toLowerCase();
+            const errorBox = document.getElementById('emailError');
+            const successBox = document.getElementById('emailSuccess');
+            errorBox.textContent = '';
+            successBox.textContent = '';
+
+            if (!newEmail) {
+                errorBox.textContent = "Email cannot be empty.";
+                return;
+            }
+
+            const user = getCurrentUser();
+            const users = getUsers();
+
+            const emailTaken = users.find(u => u.email === newEmail && u.email !== user.email);
+            if (emailTaken) {
+                errorBox.textContent = "That email is already in use.";
+                return;
+            }
+
+            const index = users.findIndex(u => u.email === user.email);
+            users[index].email = newEmail;
+            saveUsers(users);
+
+            localStorage.setItem('classdroperCurrentUser', JSON.stringify({ fullName: user.fullName, email: newEmail }));
+            successBox.textContent = "Email updated.";
+        }
+
+        function updatePassword() {
+            const newPassword = document.getElementById('accountPassword').value;
+            const errorBox = document.getElementById('passwordError');
+            const successBox = document.getElementById('passwordSuccess');
+            errorBox.textContent = '';
+            successBox.textContent = '';
+
+            if (!newPassword) {
+                errorBox.textContent = "Please enter a new password.";
+                return;
+            }
+
+            const user = getCurrentUser();
+            const users = getUsers();
+            const index = users.findIndex(u => u.email === user.email);
+            users[index].password = newPassword;
+            saveUsers(users);
+
+            document.getElementById('accountPassword').value = '';
+            successBox.textContent = "Password updated.";
+        }
+
+        function openDeleteConfirm() {
+            document.getElementById('deleteConfirm').classList.add('active');
+        }
+
+        function closeDeleteConfirm() {
+            document.getElementById('deleteConfirm').classList.remove('active');
+        }
+
+        function deleteAccount() {
+            const user = getCurrentUser();
+            let users = getUsers();
+            users = users.filter(u => u.email !== user.email);
+            saveUsers(users);
+
             localStorage.removeItem('classdroperCurrentUser');
+
+            closeDeleteConfirm();
+            closePage('account');
             updateNav();
         }
 
         function updateNav() {
             const navButtons = document.getElementById('navButtons');
-            const currentUser = localStorage.getItem('classdroperCurrentUser');
+            const currentUser = getCurrentUser();
 
             if (currentUser) {
-                const user = JSON.parse(currentUser);
-                const initial = user.fullName.charAt(0).toUpperCase();
+                const initial = currentUser.fullName.charAt(0).toUpperCase();
                 navButtons.innerHTML = `
-                    <div class="user-bubble" onclick="logOut()" title="Click to log out">
+                    <div class="user-bubble" onclick="openPage('account')" title="View account">
                         <div class="account-icon">${initial}</div>
-                        ${user.fullName}
+                        ${currentUser.fullName}
                     </div>
                 `;
             } else {
