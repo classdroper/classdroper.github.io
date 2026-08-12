@@ -147,7 +147,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: white;
+            background-color: #0F172A;
             z-index: 100;
             overflow-y: auto;
         }
@@ -160,9 +160,9 @@
             padding: 20px 30px;
             position: sticky;
             top: 0;
-            background-color: white;
+            background-color: #1E293B;
             z-index: 10;
-            border-bottom: 1px solid #eee;
+            border-bottom: 2px solid #334155;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -172,7 +172,7 @@
             background: none;
             border: none;
             font-size: 1rem;
-            color: #3B82F6;
+            color: #60A5FA;
             cursor: pointer;
         }
 
@@ -183,7 +183,7 @@
         }
 
         .fullpage-content h2 {
-            color: #3B82F6;
+            color: #60A5FA;
             font-size: 2rem;
         }
 
@@ -191,19 +191,21 @@
             width: 100%;
             padding: 12px;
             margin-bottom: 14px;
-            border: 1px solid #ccc;
+            border: 1px solid #334155;
             border-radius: 5px;
             font-size: 1rem;
+            background-color: #1E293B;
+            color: white;
         }
 
         .fullpage-content input:disabled {
-            background-color: #f0f0f0;
-            color: #888;
+            background-color: #0F172A;
+            color: #64748B;
         }
 
         .fullpage-content label {
             font-size: 0.85rem;
-            color: #555;
+            color: #CBD5E1;
             font-weight: bold;
         }
 
@@ -220,19 +222,19 @@
         }
 
         .error-text {
-            color: red;
+            color: #F87171;
             font-size: 0.85rem;
             margin-bottom: 10px;
         }
 
         .success-text {
-            color: green;
+            color: #4ADE80;
             font-size: 0.85rem;
             margin-bottom: 10px;
         }
 
         .account-section {
-            border-top: 1px solid #eee;
+            border-top: 1px solid #334155;
             padding-top: 20px;
             margin-top: 10px;
         }
@@ -283,11 +285,12 @@
         }
 
         .confirm-box {
-            background-color: white;
+            background-color: #1E293B;
             padding: 30px;
             border-radius: 10px;
             width: 300px;
             text-align: center;
+            color: white;
         }
 
         .confirm-box p {
@@ -308,7 +311,8 @@
         }
 
         .confirm-cancel {
-            background-color: #eee;
+            background-color: #334155;
+            color: white;
         }
 
         .confirm-delete {
@@ -325,7 +329,7 @@
 
         .shop-section-title {
             font-size: 1.4rem;
-            color: #111827;
+            color: #E2E8F0;
             margin-top: 30px;
             margin-bottom: 15px;
         }
@@ -337,28 +341,29 @@
         }
 
         .product-card {
-            border: 1px solid #eee;
+            border: 1px solid #334155;
             border-radius: 8px;
             padding: 15px;
             text-align: center;
-            background-color: white;
+            background-color: #1E293B;
         }
 
         .product-image-placeholder {
             width: 100%;
             height: 100px;
-            background-color: #eee;
+            background-color: #334155;
             border-radius: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #999;
+            color: #94A3B8;
             font-size: 0.85rem;
         }
 
         .product-name {
             font-weight: bold;
             margin-top: 8px;
+            color: white;
         }
 
         .product-price {
@@ -388,7 +393,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #334155;
             padding: 12px 0;
         }
 
@@ -398,10 +403,11 @@
 
         .cart-item-name {
             font-weight: bold;
+            color: white;
         }
 
         .cart-item-price {
-            color: #555;
+            color: #94A3B8;
             font-size: 0.9rem;
         }
 
@@ -414,8 +420,9 @@
         .qty-controls button {
             width: 28px;
             height: 28px;
-            border: 1px solid #ccc;
-            background-color: white;
+            border: 1px solid #334155;
+            background-color: #1E293B;
+            color: white;
             border-radius: 5px;
             cursor: pointer;
         }
@@ -426,10 +433,11 @@
             font-size: 1.2rem;
             font-weight: bold;
             margin-top: 20px;
+            color: white;
         }
 
         .empty-cart-text {
-            color: #888;
+            color: #94A3B8;
             text-align: center;
             margin-top: 40px;
         }
@@ -538,7 +546,7 @@
             <button class="back-btn" onclick="closePage('shop')">&larr; Back to home</button>
         </div>
         <div class="shop-content">
-            <h2 style="color:#3B82F6;">Shop</h2>
+            <h2 style="color:#60A5FA;">Shop</h2>
 
             <div class="shop-section-title">Stationery</div>
             <div class="product-grid" id="stationeryGrid"></div>
@@ -554,7 +562,7 @@
             <button class="back-btn" onclick="closePage('cart')">&larr; Back to shop</button>
         </div>
         <div class="cart-content">
-            <h2 style="color:#3B82F6;">Your Cart</h2>
+            <h2 style="color:#60A5FA;">Your Cart</h2>
             <div id="cartItemsContainer"></div>
             <div id="cartTotalContainer"></div>
             <button class="submit-btn" id="checkoutBtn" style="margin-top:20px;" onclick="openPage('checkout')">Checkout</button>
@@ -567,16 +575,16 @@
             <button class="back-btn" onclick="closePage('checkout')">&larr; Back to cart</button>
         </div>
         <div class="checkout-content" id="checkoutForm">
-            <h2 style="color:#3B82F6;">Checkout</h2>
-            <p style="color:#555; font-size:0.95rem;">Enter your classroom block and number so the drone knows where to deliver.</p>
+            <h2 style="color:#60A5FA;">Checkout</h2>
+            <p style="color:#CBD5E1; font-size:0.95rem;">Enter your classroom block and number so the drone knows where to deliver.</p>
             <div class="error-text" id="checkoutError"></div>
             <input type="text" id="classroomNumber" placeholder="Classroom (e.g. Y3.2)">
             <button class="submit-btn" onclick="placeOrder()">Place Order</button>
         </div>
         <div class="order-confirm" id="orderConfirmBox" style="display:none;">
             <div class="checkmark">✅</div>
-            <h2 style="color:#3B82F6;">Order Placed!</h2>
-            <p id="orderConfirmText"></p>
+            <h2 style="color:#60A5FA;">Order Placed!</h2>
+            <p id="orderConfirmText" style="color:#CBD5E1;"></p>
             <button class="submit-btn" style="max-width:250px; margin:20px auto;" onclick="backToShopFromConfirm()">Back to Shop</button>
         </div>
     </div>
