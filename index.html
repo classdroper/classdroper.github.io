@@ -503,6 +503,7 @@
             <input type="email" id="loginEmail" placeholder="Email">
             <input type="password" id="loginPassword" placeholder="Password">
             <button class="submit-btn" onclick="logIn()">Login</button>
+            <button class="submit-btn" id="loginSignupPrompt" style="display:none; background-color:#F97316;" onclick="closePage('login'); openPage('signup');">Sign Up Instead</button>
         </div>
     </div>
 
@@ -625,6 +626,7 @@
             if (type === 'shop') renderShop();
             if (type === 'cart') renderCart();
             if (type === 'checkout') resetCheckoutForm();
+            if (type === 'login') resetLoginForm();
         }
 
         function closePage(type) {
@@ -660,14 +662,29 @@
             return currentUser ? JSON.parse(currentUser) : null;
         }
 
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
         function signUp() {
             const name = document.getElementById('signupName').value.trim();
             const email = document.getElementById('signupEmail').value.trim().toLowerCase();
             const password = document.getElementById('signupPassword').value;
             const errorBox = document.getElementById('signupError');
+            errorBox.textContent = '';
 
             if (!name || !email || !password) {
                 errorBox.textContent = "Please fill in all fields.";
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                errorBox.textContent = "Please enter a valid email address.";
+                return;
+            }
+
+            if (password.length < 6) {
+                errorBox.textContent = "Password must be at least 6 characters.";
                 return;
             }
 
@@ -688,20 +705,46 @@
             openPage('shop');
         }
 
+        function resetLoginForm() {
+            document.getElementById('loginEmail').value = '';
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginError').textContent = '';
+            document.getElementById('loginSignupPrompt').style.display = 'none';
+        }
+
         function logIn() {
             const email = document.getElementById('loginEmail').value.trim().toLowerCase();
             const password = document.getElementById('loginPassword').value;
             const errorBox = document.getElementById('loginError');
+            const signupPrompt = document.getElementById('loginSignupPrompt');
+            errorBox.textContent = '';
+            signupPrompt.style.display = 'none';
 
-            const users = getUsers();
-            const match = users.find(u => u.email === email && u.password === password);
-
-            if (!match) {
-                errorBox.textContent = "Incorrect email or password.";
+            if (!email || !password) {
+                errorBox.textContent = "Please fill in all fields.";
                 return;
             }
 
-            localStorage.setItem('classdroperCurrentUser', JSON.stringify({ fullName: match.fullName, email: match.email }));
+            if (!isValidEmail(email)) {
+                errorBox.textContent = "Please enter a valid email address.";
+                return;
+            }
+
+            const users = getUsers();
+            const userWithEmail = users.find(u => u.email === email);
+
+            if (!userWithEmail) {
+                errorBox.textContent = "No account found with this email. Please sign up first.";
+                signupPrompt.style.display = 'block';
+                return;
+            }
+
+            if (userWithEmail.password !== password) {
+                errorBox.textContent = "Incorrect password.";
+                return;
+            }
+
+            localStorage.setItem('classdroperCurrentUser', JSON.stringify({ fullName: userWithEmail.fullName, email: userWithEmail.email }));
 
             closePage('login');
             updateNav();
