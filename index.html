@@ -449,6 +449,39 @@
             padding: 0 20px;
         }
 
+        .block-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(55px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .block-btn {
+            padding: 12px 0;
+            background-color: #1E293B;
+            border: 1px solid #334155;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .block-btn.selected {
+            background-color: #3B82F6;
+            border-color: #3B82F6;
+        }
+
+        .change-block-link {
+            display: block;
+            margin-top: 10px;
+            background: none;
+            border: none;
+            color: #60A5FA;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
         .order-confirm {
             text-align: center;
             margin-top: 60px;
@@ -577,10 +610,19 @@
         </div>
         <div class="checkout-content" id="checkoutForm">
             <h2 style="color:#60A5FA;">Checkout</h2>
-            <p style="color:#CBD5E1; font-size:0.95rem;">Enter your classroom block and number so the drone knows where to deliver.</p>
-            <div class="error-text" id="checkoutError"></div>
-            <input type="text" id="classroomNumber" placeholder="Classroom (e.g. Y3.2)">
-            <button class="submit-btn" onclick="placeOrder()">Place Order</button>
+            <div id="checkoutBlockStage">
+                <p style="color:#CBD5E1; font-size:0.95rem;">Select your block.</p>
+                <div class="error-text" id="checkoutError"></div>
+                <div class="block-grid" id="blockGrid"></div>
+                <button class="submit-btn" id="confirmBlockBtn" onclick="confirmBlock()" disabled>Confirm</button>
+            </div>
+            <div id="checkoutRoomStage" style="display:none;">
+                <p style="color:#CBD5E1; font-size:0.95rem;">Select your classroom.</p>
+                <div class="error-text" id="checkoutRoomError"></div>
+                <div class="block-grid" id="roomGrid"></div>
+                <button class="submit-btn" id="confirmRoomBtn" onclick="placeOrder()" disabled>Confirm &amp; Place Order</button>
+                <button class="change-block-link" onclick="backToBlockStage()">&larr; Change block</button>
+            </div>
         </div>
         <div class="order-confirm" id="orderConfirmBox" style="display:none;">
             <div class="checkmark">✅</div>
@@ -963,26 +1005,88 @@
         }
 
         /* Checkout logic */
+        const blockRooms = {
+            A: ["a1","a2","a3","a4","a5","a6","aMUS2","aMUS3","aMUS1","aHALL4","aWILSONHALL","aHALL1","aHALL2","aHALL3","a12","a13","a14","a15","a16","a17"],
+            B: [], C: [], D: [], E: [], F: [], G: [], H: [], L: [], M: [], N: [], O: [], P: [], Q: [], R: [], S: [], T: [], U: [], V: [], W: [], X: [], Y: []
+        };
+
+        let selectedBlock = null;
+        let selectedRoom = null;
+
         function resetCheckoutForm() {
             document.getElementById('checkoutForm').style.display = 'block';
             document.getElementById('orderConfirmBox').style.display = 'none';
-            document.getElementById('classroomNumber').value = '';
+            document.getElementById('checkoutBlockStage').style.display = 'block';
+            document.getElementById('checkoutRoomStage').style.display = 'none';
+            document.getElementById('checkoutError').textContent = '';
+            document.getElementById('checkoutRoomError').textContent = '';
+            document.getElementById('confirmBlockBtn').disabled = true;
+            document.getElementById('confirmRoomBtn').disabled = true;
+            selectedBlock = null;
+            selectedRoom = null;
+            renderBlockGrid();
+        }
+
+        function renderBlockGrid() {
+            const grid = document.getElementById('blockGrid');
+            grid.innerHTML = Object.keys(blockRooms).map(letter => `
+                <button class="block-btn ${selectedBlock === letter ? 'selected' : ''}" onclick="selectBlock('${letter}')">${letter}</button>
+            `).join('');
+        }
+
+        function selectBlock(letter) {
+            selectedBlock = letter;
+            renderBlockGrid();
+            document.getElementById('confirmBlockBtn').disabled = false;
             document.getElementById('checkoutError').textContent = '';
         }
 
-        function placeOrder() {
-            const classroom = document.getElementById('classroomNumber').value.trim();
-            const errorBox = document.getElementById('checkoutError');
+        function confirmBlock() {
+            if (!selectedBlock) return;
+            const rooms = blockRooms[selectedBlock];
 
-            if (!classroom) {
-                errorBox.textContent = "Please enter your classroom number.";
+            if (!rooms || rooms.length === 0) {
+                document.getElementById('checkoutError').textContent = `Rooms for Block ${selectedBlock} are coming soon. Please pick another block.`;
+                return;
+            }
+
+            document.getElementById('checkoutBlockStage').style.display = 'none';
+            document.getElementById('checkoutRoomStage').style.display = 'block';
+            selectedRoom = null;
+            renderRoomGrid();
+        }
+
+        function renderRoomGrid() {
+            const grid = document.getElementById('roomGrid');
+            const rooms = blockRooms[selectedBlock] || [];
+            grid.innerHTML = rooms.map(room => `
+                <button class="block-btn ${selectedRoom === room ? 'selected' : ''}" onclick="selectRoom('${room}')">${room}</button>
+            `).join('');
+        }
+
+        function selectRoom(room) {
+            selectedRoom = room;
+            renderRoomGrid();
+            document.getElementById('confirmRoomBtn').disabled = false;
+            document.getElementById('checkoutRoomError').textContent = '';
+        }
+
+        function backToBlockStage() {
+            document.getElementById('checkoutRoomStage').style.display = 'none';
+            document.getElementById('checkoutBlockStage').style.display = 'block';
+            selectedRoom = null;
+        }
+
+        function placeOrder() {
+            if (!selectedRoom) {
+                document.getElementById('checkoutRoomError').textContent = "Please select your classroom.";
                 return;
             }
 
             document.getElementById('checkoutForm').style.display = 'none';
             document.getElementById('orderConfirmBox').style.display = 'block';
             document.getElementById('orderConfirmText').textContent =
-                `Your order is on its way to Classroom ${classroom} by drone.`;
+                `Your order is on its way to Classroom ${selectedRoom} by drone.`;
 
             saveCart([]);
             updateNav();
