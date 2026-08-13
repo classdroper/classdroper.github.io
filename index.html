@@ -320,6 +320,35 @@
             color: white;
         }
 
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background-color: #1E293B;
+            color: white;
+            border: 1px solid #334155;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 300;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .toast.active {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast .toast-check {
+            color: #4ADE80;
+            margin-right: 8px;
+        }
+
         /* Shop page */
         .shop-content {
             max-width: 900px;
@@ -643,6 +672,9 @@
         </div>
     </div>
 
+    <!-- Toast notification -->
+    <div class="toast" id="toast"><span class="toast-check">&#10003;</span><span id="toastMessage"></span></div>
+
     <script>
         const products = {
             stationery: [
@@ -936,6 +968,22 @@
             localStorage.setItem('classdroperCart', JSON.stringify(cart));
         }
 
+        /* Toast notifications */
+        let toastTimeout;
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+
+            toastMessage.textContent = message;
+            toast.classList.add('active');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('active');
+            }, 2000);
+        }
+
         function addToCart(category, index) {
             const product = products[category][index];
             const cart = getCart();
@@ -949,6 +997,7 @@
 
             saveCart(cart);
             updateNav();
+            showToast(`${product.name} added to cart`);
         }
 
         function changeQty(name, delta) {
