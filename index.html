@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ClassDropper</title>
+    <title>SupplyCollect</title>
     <style>
         * {
             box-sizing: border-box;
@@ -524,7 +524,7 @@
 <body>
 
     <nav>
-        <div class="logo" onclick="goHome()">ClassDropper</div>
+        <div class="logo" onclick="goHome()">SupplyCollect</div>
         <div class="nav-buttons" id="navButtons">
             <button class="btn btn-login" onclick="openPage('login')">Login</button>
             <button class="btn btn-signup" onclick="openPage('signup')">Sign Up</button>
@@ -532,12 +532,12 @@
     </nav>
 
     <div class="hero" id="heroSection">
-    <p style="color:#F97316; font-weight:bold; margin-bottom:10px;">By students, for students</p>
-    <h1>Snacks and stationary, dropped right to your class</h1>
-    <p>Order what you need, a drone delivers it straight to your classroom door.</p>
-    <p style="color:#94A3B8; font-size:0.95rem;">Only available for Bacchus Marsh Grammar students</p>
-    <button onclick="goToShop()">Start Ordering</button>
-</div>
+        <p style="color:#F97316; font-weight:bold; margin-bottom:10px;">By students, for students</p>
+        <h1>Snacks and stationery, dropped right to your class</h1>
+        <p>Order what you need, a drone delivers it straight to your classroom door.</p>
+        <p style="color:#94A3B8; font-size:0.95rem;">Only available for Bacchus Marsh Grammar students</p>
+        <button onclick="goToShop()">Start Ordering</button>
+    </div>
 
     <!-- Sign Up Full Page -->
     <div class="fullpage" id="signupPage">
@@ -723,16 +723,16 @@
         }
 
         function getUsers() {
-            const users = localStorage.getItem('classdroperUsers');
+            const users = localStorage.getItem('supplycollectUsers');
             return users ? JSON.parse(users) : [];
         }
 
         function saveUsers(users) {
-            localStorage.setItem('classdroperUsers', JSON.stringify(users));
+            localStorage.setItem('supplycollectUsers', JSON.stringify(users));
         }
 
         function getCurrentUser() {
-            const currentUser = localStorage.getItem('classdroperCurrentUser');
+            const currentUser = localStorage.getItem('supplycollectCurrentUser');
             return currentUser ? JSON.parse(currentUser) : null;
         }
 
@@ -772,7 +772,7 @@
             users.push({ fullName: name, email: email, password: password });
             saveUsers(users);
 
-            localStorage.setItem('classdroperCurrentUser', JSON.stringify({ fullName: name, email: email }));
+            localStorage.setItem('supplycollectCurrentUser', JSON.stringify({ fullName: name, email: email }));
 
             closePage('signup');
             updateNav();
@@ -818,7 +818,7 @@
                 return;
             }
 
-            localStorage.setItem('classdroperCurrentUser', JSON.stringify({ fullName: userWithEmail.fullName, email: userWithEmail.email }));
+            localStorage.setItem('supplycollectCurrentUser', JSON.stringify({ fullName: userWithEmail.fullName, email: userWithEmail.email }));
 
             closePage('login');
             updateNav();
@@ -856,7 +856,7 @@
             users[index].fullName = newName;
             saveUsers(users);
 
-            localStorage.setItem('classdroperCurrentUser', JSON.stringify({ fullName: newName, email: user.email }));
+            localStorage.setItem('supplycollectCurrentUser', JSON.stringify({ fullName: newName, email: user.email }));
             successBox.textContent = "Name updated.";
             updateNav();
         }
@@ -884,7 +884,7 @@
         }
 
         function signOut() {
-            localStorage.removeItem('classdroperCurrentUser');
+            localStorage.removeItem('supplycollectCurrentUser');
             closePage('account');
             updateNav();
         }
@@ -903,7 +903,7 @@
             users = users.filter(u => u.email !== user.email);
             saveUsers(users);
 
-            localStorage.removeItem('classdroperCurrentUser');
+            localStorage.removeItem('supplycollectCurrentUser');
 
             closeDeleteConfirm();
             closePage('account');
@@ -960,12 +960,12 @@
 
         /* Cart logic */
         function getCart() {
-            const cart = localStorage.getItem('classdroperCart');
+            const cart = localStorage.getItem('supplycollectCart');
             return cart ? JSON.parse(cart) : [];
         }
 
         function saveCart(cart) {
-            localStorage.setItem('classdroperCart', JSON.stringify(cart));
+            localStorage.setItem('supplycollectCart', JSON.stringify(cart));
         }
 
         /* Toast notifications */
@@ -997,22 +997,7 @@
 
             saveCart(cart);
             updateNav();
-            showToast(`${product.name} added to cart`);
-        }
-
-        function changeQty(name, delta) {
-            let cart = getCart();
-            const item = cart.find(i => i.name === name);
-            if (!item) return;
-
-            item.qty += delta;
-            if (item.qty <= 0) {
-                cart = cart.filter(i => i.name !== name);
-            }
-
-            saveCart(cart);
-            renderCart();
-            updateNav();
+            showToast(`${product.name} added to cart!`);
         }
 
         function renderCart() {
@@ -1030,16 +1015,16 @@
 
             checkoutBtn.style.display = 'block';
 
-            container.innerHTML = cart.map(item => `
+            container.innerHTML = cart.map((item, i) => `
                 <div class="cart-item">
                     <div class="cart-item-info">
                         <div class="cart-item-name">${item.name}</div>
                         <div class="cart-item-price">$${item.price.toFixed(2)} each</div>
                     </div>
                     <div class="qty-controls">
-                        <button onclick="changeQty('${item.name}', -1)">-</button>
-                        <span>${item.qty}</span>
-                        <button onclick="changeQty('${item.name}', 1)">+</button>
+                        <button onclick="changeQty(${i}, -1)">-</button>
+                        <span style="color:white;">${item.qty}</span>
+                        <button onclick="changeQty(${i}, 1)">+</button>
                     </div>
                 </div>
             `).join('');
@@ -1047,67 +1032,75 @@
             const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             totalContainer.innerHTML = `
                 <div class="cart-total">
-                    <span>Total</span>
+                    <span>Total:</span>
                     <span>$${total.toFixed(2)}</span>
                 </div>
             `;
         }
 
-        /* Checkout logic */
-        const blockRooms = {
-            A: ["a1","a2","a3","a4","a5","a6","aMUS2","aMUS3","aMUS1","aHALL4","aWILSONHALL","aHALL1","aHALL2","aHALL3","a12","a13","a14","a15","a16","a17"],
-            B: [], C: [], D: [], E: [], F: [], G: [], H: [], L: [], M: [], N: [], O: [], P: [], Q: [], R: [], S: [], T: [], U: [], V: [], W: [], X: [], Y: []
-        };
+        function changeQty(index, change) {
+            const cart = getCart();
+            cart[index].qty += change;
 
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+
+            saveCart(cart);
+            updateNav();
+            renderCart();
+        }
+
+        /* Checkout Stage Logic */
         let selectedBlock = null;
         let selectedRoom = null;
 
         function resetCheckoutForm() {
-            document.getElementById('checkoutForm').style.display = 'block';
-            document.getElementById('orderConfirmBox').style.display = 'none';
+            selectedBlock = null;
+            selectedRoom = null;
             document.getElementById('checkoutBlockStage').style.display = 'block';
             document.getElementById('checkoutRoomStage').style.display = 'none';
+            document.getElementById('orderConfirmBox').style.display = 'none';
+            document.getElementById('checkoutForm').style.display = 'block';
             document.getElementById('checkoutError').textContent = '';
             document.getElementById('checkoutRoomError').textContent = '';
             document.getElementById('confirmBlockBtn').disabled = true;
             document.getElementById('confirmRoomBtn').disabled = true;
-            selectedBlock = null;
-            selectedRoom = null;
+
             renderBlockGrid();
         }
 
         function renderBlockGrid() {
             const grid = document.getElementById('blockGrid');
-            grid.innerHTML = Object.keys(blockRooms).map(letter => `
-                <button class="block-btn ${selectedBlock === letter ? 'selected' : ''}" onclick="selectBlock('${letter}')">${letter}</button>
+            const blocks = ['A', 'B', 'C', 'D', 'E', 'F', 'M', 'P', 'S', 'G'];
+            
+            grid.innerHTML = blocks.map(block => `
+                <button class="block-btn ${selectedBlock === block ? 'selected' : ''}" onclick="selectBlock('${block}')">${block}</button>
             `).join('');
         }
 
-        function selectBlock(letter) {
-            selectedBlock = letter;
+        function selectBlock(block) {
+            selectedBlock = block;
             renderBlockGrid();
             document.getElementById('confirmBlockBtn').disabled = false;
-            document.getElementById('checkoutError').textContent = '';
         }
 
         function confirmBlock() {
             if (!selectedBlock) return;
-            const rooms = blockRooms[selectedBlock];
-
-            if (!rooms || rooms.length === 0) {
-                document.getElementById('checkoutError').textContent = `Rooms for Block ${selectedBlock} are coming soon. Please pick another block.`;
-                return;
-            }
-
             document.getElementById('checkoutBlockStage').style.display = 'none';
             document.getElementById('checkoutRoomStage').style.display = 'block';
-            selectedRoom = null;
             renderRoomGrid();
+        }
+
+        function backToBlockStage() {
+            document.getElementById('checkoutBlockStage').style.display = 'block';
+            document.getElementById('checkoutRoomStage').style.display = 'none';
         }
 
         function renderRoomGrid() {
             const grid = document.getElementById('roomGrid');
-            const rooms = blockRooms[selectedBlock] || [];
+            const rooms = Array.from({ length: 10 }, (_, i) => `${selectedBlock}${i + 1}`);
+
             grid.innerHTML = rooms.map(room => `
                 <button class="block-btn ${selectedRoom === room ? 'selected' : ''}" onclick="selectRoom('${room}')">${room}</button>
             `).join('');
@@ -1117,28 +1110,19 @@
             selectedRoom = room;
             renderRoomGrid();
             document.getElementById('confirmRoomBtn').disabled = false;
-            document.getElementById('checkoutRoomError').textContent = '';
-        }
-
-        function backToBlockStage() {
-            document.getElementById('checkoutRoomStage').style.display = 'none';
-            document.getElementById('checkoutBlockStage').style.display = 'block';
-            selectedRoom = null;
         }
 
         function placeOrder() {
-            if (!selectedRoom) {
-                document.getElementById('checkoutRoomError').textContent = "Please select your classroom.";
-                return;
-            }
+            if (!selectedRoom) return;
 
-            document.getElementById('checkoutForm').style.display = 'none';
-            document.getElementById('orderConfirmBox').style.display = 'block';
-            document.getElementById('orderConfirmText').textContent =
-                `Your order is on its way to Classroom ${selectedRoom} by drone.`;
-
+            // Clear Cart
             saveCart([]);
             updateNav();
+
+            // Display confirmation screen
+            document.getElementById('checkoutForm').style.display = 'none';
+            document.getElementById('orderConfirmText').textContent = `Your drone delivery is on its way to classroom ${selectedRoom}!`;
+            document.getElementById('orderConfirmBox').style.display = 'block';
         }
 
         function backToShopFromConfirm() {
@@ -1146,8 +1130,8 @@
             openPage('shop');
         }
 
+        // Initialize App State
         updateNav();
     </script>
-
 </body>
 </html>
