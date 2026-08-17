@@ -534,7 +534,7 @@
     <div class="hero" id="heroSection">
         <p style="color:#F97316; font-weight:bold; margin-bottom:10px;">By students, for students</p>
         <h1>Snacks and stationery, dropped right to your class</h1>
-        <p>Order what you need, a drone delivers it straight to your classroom door.</p>
+        <p>Order or rent what you need, a drone delivers it straight to your classroom door.</p>
         <p style="color:#94A3B8; font-size:0.95rem;">Only available for Bacchus Marsh Grammar students</p>
         <button onclick="goToShop()">Start Ordering</button>
     </div>
@@ -614,6 +614,9 @@
             <div class="shop-section-title">Stationery</div>
             <div class="product-grid" id="stationeryGrid"></div>
 
+            <div class="shop-section-title">Rentals</div>
+            <div class="product-grid" id="rentGrid"></div>
+
             <div class="shop-section-title">Snacks</div>
             <div class="product-grid" id="snacksGrid"></div>
         </div>
@@ -678,11 +681,18 @@
     <script>
         const products = {
             stationery: [
-                { name: "Pen", price: 1.50 },
-                { name: "Pencil", price: 1.00 },
-                { name: "Notebook", price: 3.50 },
                 { name: "Eraser", price: 0.80 },
-                { name: "Ruler", price: 1.20 }
+                { name: "Red Pen", price: 1.50 },
+                { name: "Blue Pen", price: 1.50 },
+                { name: "Black Pen", price: 1.50 },
+                { name: "Sharpener", price: 1.00 },
+                { name: "Ruler", price: 1.20 },
+                { name: "Whiteboard Marker", price: 2.00 }
+            ],
+            rent: [
+                { name: "Scientific Calculator (Rent)", price: 3.00 },
+                { name: "Chromebook Charger (Rent)", price: 2.50 },
+                { name: "Mouse/Keyboard Set (Rent)", price: 4.00 }
             ],
             snacks: [
                 { name: "Chips", price: 2.50 },
@@ -941,9 +951,11 @@
         /* Shop rendering */
         function renderShop() {
             const stationeryGrid = document.getElementById('stationeryGrid');
+            const rentGrid = document.getElementById('rentGrid');
             const snacksGrid = document.getElementById('snacksGrid');
 
             stationeryGrid.innerHTML = products.stationery.map((p, i) => productCard(p, 'stationery', i)).join('');
+            rentGrid.innerHTML = products.rent.map((p, i) => productCard(p, 'rent', i)).join('');
             snacksGrid.innerHTML = products.snacks.map((p, i) => productCard(p, 'snacks', i)).join('');
         }
 
