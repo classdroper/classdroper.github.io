@@ -50,23 +50,17 @@
             background-color: white;
             color: #3B82F6;
             border: 2px solid #3B82F6;
-            border-radius: 10px;
-
         }
 
         .btn-signup {
             background-color: #F97316;
             color: white;
-            border-radius: 10px;
-
         }
 
         .btn-shop {
             background-color: white;
             color: #111827;
             border: 2px solid #ddd;
-            border-radius: 10px;
-
         }
 
         .cart-btn {
@@ -141,7 +135,7 @@
             background-color: #F97316;
             color: white;
             border: none;
-            border-radius: 18px;
+            border-radius: 8px;
             font-size: 1.1rem;
             cursor: pointer;
         }
@@ -166,7 +160,7 @@
             padding: 20px 30px;
             position: sticky;
             top: 0;
-            background-color: #8a909a;
+            background-color: #1E293B;
             z-index: 10;
             border-bottom: 2px solid #334155;
             display: flex;
@@ -225,6 +219,11 @@
             cursor: pointer;
             font-size: 1rem;
             margin-bottom: 25px;
+        }
+
+        button.submit-btn:disabled {
+            background-color: #334155;
+            cursor: not-allowed;
         }
 
         .error-text {
@@ -397,6 +396,12 @@
             color: white;
         }
 
+        .product-time {
+            font-size: 0.8rem;
+            color: #94A3B8;
+            margin-top: 4px;
+        }
+
         .product-price {
             color: #3B82F6;
             font-weight: bold;
@@ -448,6 +453,11 @@
         .cart-item-price {
             color: #94A3B8;
             font-size: 0.9rem;
+        }
+
+        .cart-item-prep {
+            color: #60A5FA;
+            font-size: 0.8rem;
         }
 
         .qty-controls {
@@ -527,6 +537,26 @@
 
         .order-confirm .checkmark {
             font-size: 4rem;
+        }
+
+        .time-box {
+            background-color: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 300px;
+        }
+
+        .time-box h4 {
+            margin: 0 0 5px 0;
+            color: #60A5FA;
+        }
+
+        .time-box .time-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4ADE80;
         }
     </style>
 </head>
@@ -669,6 +699,10 @@
             <div class="checkmark">✅</div>
             <h2 style="color:#60A5FA;">Order Placed!</h2>
             <p id="orderConfirmText" style="color:#CBD5E1;"></p>
+            <div class="time-box">
+                <h4>Estimated Ready Time</h4>
+                <div class="time-value" id="estimatedTimeDisplay">-- mins</div>
+            </div>
             <button class="submit-btn" style="max-width:250px; margin:20px auto;" onclick="backToShopFromConfirm()">Back to Shop</button>
         </div>
     </div>
@@ -690,25 +724,30 @@
     <script>
         const products = {
             stationery: [
-                { name: "Black Pen", price: 1.50, image: "./images (2).jpeg" },
-                { name: "Blue Pen", price: 1.50, image: "./images (1).jpeg" },
-                { name: "Red Pen", price: 1.50, image: "./images.jpeg" },
-                { name: "Eraser", price: 0.80, image: "./download.jpeg" },
-                { name: "Sharpener", price: 1.00, image: "./images (3).jpeg" },
-                { name: "Ruler", price: 1.20, image: "./images (4).jpeg" },
-                { name: "Whiteboard Marker", price: 2.00, image: "./images (5).jpeg" }
+                { name: "Black Pen", price: 1.50, prepTime: 2, image: "./images (2).jpeg" },
+                { name: "Blue Pen", price: 1.50, prepTime: 2, image: "./images (1).jpeg" },
+                { name: "Red Pen", price: 1.50, prepTime: 2, image: "./images.jpeg" },
+                { name: "Eraser", price: 0.80, prepTime: 2, image: "./download.jpeg" },
+                { name: "Sharpener", price: 1.00, prepTime: 3, image: "./images (3).jpeg" },
+                { name: "Ruler", price: 1.20, prepTime: 3, image: "./images (4).jpeg" },
+                { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "./images (5).jpeg" }
             ],
             rent: [
-                { name: "Scientific Calculator (Rent)", price: 3.00, image: "./images (6).jpeg" },
-                { name: "Chromebook Charger (Rent)", price: 2.50, image: "./images (7).jpeg" },
-                { name: "Mouse/Keyboard Set (Rent)", price: 4.00, image: "./images (8).jpeg" }
+                { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "./images (6).jpeg" },
+                { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "./images (7).jpeg" },
+                { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "./images (8).jpeg" }
             ],
             snacks: [
-                { name: "Orange Juice Box", price: 2.20, image: "./images (9).jpeg" },
-                { name: "Apple Juice Box", price: 2.20, image: "./images (10).jpeg" },
-                { name: "Muesli Bar", price: 1.80, image: "./images (11).jpeg" }
+                { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "./images (9).jpeg" },
+                { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "./images (10).jpeg" },
+                { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "./images (11).jpeg" }
             ]
         };
+
+        const blocks = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"];
+        const rooms = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
+        let selectedBlock = "";
+        let selectedRoom = "";
 
         function openPage(type) {
             document.getElementById(type + 'Page').classList.add('active');
@@ -971,6 +1010,7 @@
                 <div class="product-card">
                     <img class="product-image" src="${product.image}" alt="${product.name}">
                     <div class="product-name">${product.name}</div>
+                    <div class="product-time">⏱ Approx. ${product.prepTime} mins</div>
                     <div class="product-price">$${product.price.toFixed(2)}</div>
                     <button class="add-cart-btn" onclick="addToCart('${category}', ${index})">Add to Cart</button>
                 </div>
@@ -984,47 +1024,41 @@
 
         function saveCart(cart) {
             localStorage.setItem('supplycollectCart', JSON.stringify(cart));
-        }
-
-        let toastTimeout;
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-
-            toastMessage.textContent = message;
-            toast.classList.add('active');
-
-            clearTimeout(toastTimeout);
-            toastTimeout = setTimeout(() => {
-                toast.classList.remove('active');
-            }, 2000);
+            updateNav();
         }
 
         function addToCart(category, index) {
-            const product = products[category][index];
+            const item = products[category][index];
             const cart = getCart();
-            const existing = cart.find(item => item.name === product.name);
+            const existing = cart.find(c => c.name === item.name);
 
             if (existing) {
                 existing.qty += 1;
             } else {
-                cart.push({ name: product.name, price: product.price, image: product.image, qty: 1 });
+                cart.push({ ...item, qty: 1 });
             }
 
             saveCart(cart);
-            updateNav();
-            showToast(`${product.name} added to cart!`);
+            showToast(`Added ${item.name} to cart`);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMessage').textContent = msg;
+            toast.classList.add('active');
+            setTimeout(() => {
+                toast.classList.remove('active');
+            }, 2000);
         }
 
         function renderCart() {
             const cart = getCart();
-            const container = document.getElementById('cartItemsContainer');
+            const itemsContainer = document.getElementById('cartItemsContainer');
             const totalContainer = document.getElementById('cartTotalContainer');
             const checkoutBtn = document.getElementById('checkoutBtn');
 
             if (cart.length === 0) {
-                container.innerHTML = '<div class="empty-cart-text">Your cart is empty.</div>';
+                itemsContainer.innerHTML = '<div class="empty-cart-text">Your cart is empty.</div>';
                 totalContainer.innerHTML = '';
                 checkoutBtn.style.display = 'none';
                 return;
@@ -1032,17 +1066,18 @@
 
             checkoutBtn.style.display = 'block';
 
-            container.innerHTML = cart.map((item, i) => `
+            itemsContainer.innerHTML = cart.map((item, idx) => `
                 <div class="cart-item">
                     <img class="cart-item-img" src="${item.image}" alt="${item.name}">
                     <div class="cart-item-info">
                         <div class="cart-item-name">${item.name}</div>
-                        <div class="cart-item-price">$${item.price.toFixed(2)} each</div>
+                        <div class="cart-item-price">$${(item.price * item.qty).toFixed(2)}</div>
+                        <div class="cart-item-prep">Est. prep: ${item.prepTime} mins each</div>
                     </div>
                     <div class="qty-controls">
-                        <button onclick="changeQty(${i}, -1)">-</button>
+                        <button onclick="changeQty(${idx}, -1)">-</button>
                         <span style="color:white;">${item.qty}</span>
-                        <button onclick="changeQty(${i}, 1)">+</button>
+                        <button onclick="changeQty(${idx}, 1)">+</button>
                     </div>
                 </div>
             `).join('');
@@ -1056,48 +1091,41 @@
             `;
         }
 
-        function changeQty(index, change) {
+        function changeQty(index, delta) {
             const cart = getCart();
-            cart[index].qty += change;
+            cart[index].qty += delta;
 
             if (cart[index].qty <= 0) {
                 cart.splice(index, 1);
             }
 
             saveCart(cart);
-            updateNav();
             renderCart();
         }
 
-        let selectedBlock = null;
-        let selectedRoom = null;
-
         function resetCheckoutForm() {
-            selectedBlock = null;
-            selectedRoom = null;
+            selectedBlock = "";
+            selectedRoom = "";
+            document.getElementById('checkoutForm').style.display = 'block';
+            document.getElementById('orderConfirmBox').style.display = 'none';
             document.getElementById('checkoutBlockStage').style.display = 'block';
             document.getElementById('checkoutRoomStage').style.display = 'none';
-            document.getElementById('orderConfirmBox').style.display = 'none';
-            document.getElementById('checkoutForm').style.display = 'block';
             document.getElementById('checkoutError').textContent = '';
             document.getElementById('checkoutRoomError').textContent = '';
             document.getElementById('confirmBlockBtn').disabled = true;
-            document.getElementById('confirmRoomBtn').disabled = true;
 
             renderBlockGrid();
         }
 
         function renderBlockGrid() {
-            const grid = document.getElementById('blockGrid');
-            const blocks = ['A', 'B', 'C', 'D', 'E', 'F', 'M', 'P', 'S', 'G'];
-            
-            grid.innerHTML = blocks.map(block => `
-                <button class="block-btn ${selectedBlock === block ? 'selected' : ''}" onclick="selectBlock('${block}')">${block}</button>
+            const blockGrid = document.getElementById('blockGrid');
+            blockGrid.innerHTML = blocks.map(b => `
+                <button class="block-btn ${selectedBlock === b ? 'selected' : ''}" onclick="selectBlock('${b}')">${b}</button>
             `).join('');
         }
 
-        function selectBlock(block) {
-            selectedBlock = block;
+        function selectBlock(b) {
+            selectedBlock = b;
             renderBlockGrid();
             document.getElementById('confirmBlockBtn').disabled = false;
         }
@@ -1106,38 +1134,55 @@
             if (!selectedBlock) return;
             document.getElementById('checkoutBlockStage').style.display = 'none';
             document.getElementById('checkoutRoomStage').style.display = 'block';
+            document.getElementById('confirmRoomBtn').disabled = true;
             renderRoomGrid();
         }
 
         function backToBlockStage() {
-            document.getElementById('checkoutBlockStage').style.display = 'block';
             document.getElementById('checkoutRoomStage').style.display = 'none';
+            document.getElementById('checkoutBlockStage').style.display = 'block';
         }
 
         function renderRoomGrid() {
-            const grid = document.getElementById('roomGrid');
-            const rooms = Array.from({ length: 10 }, (_, i) => `${selectedBlock}${i + 1}`);
-
-            grid.innerHTML = rooms.map(room => `
-                <button class="block-btn ${selectedRoom === room ? 'selected' : ''}" onclick="selectRoom('${room}')">${room}</button>
+            const roomGrid = document.getElementById('roomGrid');
+            roomGrid.innerHTML = rooms.map(r => `
+                <button class="block-btn ${selectedRoom === r ? 'selected' : ''}" onclick="selectRoom('${r}')">${r}</button>
             `).join('');
         }
 
-        function selectRoom(room) {
-            selectedRoom = room;
+        function selectRoom(r) {
+            selectedRoom = r;
             renderRoomGrid();
             document.getElementById('confirmRoomBtn').disabled = false;
         }
 
+        function calculateAveragePrepTime() {
+            const cart = getCart();
+            if (cart.length === 0) return 0;
+
+            let totalItemsCount = 0;
+            let totalPrepTimeSum = 0;
+
+            cart.forEach(item => {
+                totalPrepTimeSum += item.prepTime * item.qty;
+                totalItemsCount += item.qty;
+            });
+
+            const averageMinutes = Math.ceil(totalPrepTimeSum / totalItemsCount);
+            return averageMinutes;
+        }
+
         function placeOrder() {
-            if (!selectedRoom) return;
+            if (!selectedBlock || !selectedRoom) return;
+
+            const avgTime = calculateAveragePrepTime();
 
             saveCart([]);
-            updateNav();
 
             document.getElementById('checkoutForm').style.display = 'none';
-            document.getElementById('orderConfirmText').textContent = `Your order is ready for pickup at Block ${selectedBlock}, Room ${selectedRoom}!`;
             document.getElementById('orderConfirmBox').style.display = 'block';
+            document.getElementById('orderConfirmText').textContent = `Your order has been sent. Pickup location: Block ${selectedBlock}, Room ${selectedRoom}.`;
+            document.getElementById('estimatedTimeDisplay').textContent = `${avgTime} min${avgTime > 1 ? 's' : ''}`;
         }
 
         function backToShopFromConfirm() {
