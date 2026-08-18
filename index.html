@@ -349,7 +349,6 @@
             margin-right: 8px;
         }
 
-        /* Shop page */
         .shop-content {
             max-width: 900px;
             margin: 30px auto;
@@ -379,10 +378,11 @@
 
         .product-image {
             width: 100%;
-            height: 100px;
-            object-fit: cover;
+            height: 120px;
+            object-fit: contain;
             border-radius: 5px;
-            background-color: #334155;
+            background-color: #FFFFFF;
+            padding: 5px;
         }
 
         .product-name {
@@ -407,7 +407,6 @@
             cursor: pointer;
         }
 
-        /* Cart page */
         .cart-content {
             max-width: 500px;
             margin: 30px auto;
@@ -425,9 +424,10 @@
         .cart-item-img {
             width: 50px;
             height: 50px;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 6px;
-            background-color: #334155;
+            background-color: #FFFFFF;
+            padding: 2px;
         }
 
         .cart-item-info {
@@ -475,7 +475,6 @@
             margin-top: 40px;
         }
 
-        /* Checkout page */
         .checkout-content {
             max-width: 350px;
             margin: 40px auto 0 auto;
@@ -543,7 +542,7 @@
         <button onclick="goToShop()">Start Ordering</button>
     </div>
 
-    <!-- Sign Up Full Page -->
+    <!-- Sign Up Page -->
     <div class="fullpage" id="signupPage">
         <div class="fullpage-top">
             <button class="back-btn" onclick="closePage('signup')">&larr; Back to home</button>
@@ -558,7 +557,7 @@
         </div>
     </div>
 
-    <!-- Login Full Page -->
+    <!-- Login Page -->
     <div class="fullpage" id="loginPage">
         <div class="fullpage-top">
             <button class="back-btn" onclick="closePage('login')">&larr; Back to home</button>
@@ -573,7 +572,7 @@
         </div>
     </div>
 
-    <!-- Account Details Full Page -->
+    <!-- Account Details Page -->
     <div class="fullpage" id="accountPage">
         <div class="fullpage-top">
             <button class="back-btn" onclick="closePage('account')">&larr; Back to home</button>
@@ -607,7 +606,7 @@
         </div>
     </div>
 
-    <!-- Shop Full Page -->
+    <!-- Shop Page -->
     <div class="fullpage" id="shopPage">
         <div class="fullpage-top">
             <button class="back-btn" onclick="closePage('shop')">&larr; Back to home</button>
@@ -626,7 +625,7 @@
         </div>
     </div>
 
-    <!-- Cart Full Page -->
+    <!-- Cart Page -->
     <div class="fullpage" id="cartPage">
         <div class="fullpage-top">
             <button class="back-btn" onclick="closePage('cart')">&larr; Back to shop</button>
@@ -639,7 +638,7 @@
         </div>
     </div>
 
-    <!-- Checkout Full Page -->
+    <!-- Checkout Page -->
     <div class="fullpage" id="checkoutPage">
         <div class="fullpage-top">
             <button class="back-btn" onclick="closePage('checkout')">&larr; Back to cart</button>
@@ -685,24 +684,23 @@
     <script>
         const products = {
             stationery: [
-                { name: "Eraser", price: 0.80, image: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=300&q=80" },
-                { name: "Red Pen", price: 1.50, image: "https://images.unsplash.com/photo-1585336261026-6757f541a674?auto=format&fit=crop&w=300&q=80" },
-                { name: "Blue Pen", price: 1.50, image: "https://images.unsplash.com/photo-1585336261026-6757f541a674?auto=format&fit=crop&w=300&q=80" },
-                { name: "Black Pen", price: 1.50, image: "https://images.unsplash.com/photo-1585336261026-6757f541a674?auto=format&fit=crop&w=300&q=80" },
-                { name: "Sharpener", price: 1.00, image: "https://images.unsplash.com/photo-1610444391206-88d40733560b?auto=format&fit=crop&w=300&q=80" },
-                { name: "Ruler", price: 1.20, image: "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=300&q=80" },
-                { name: "Whiteboard Marker", price: 2.00, image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?auto=format&fit=crop&w=300&q=80" }
+                { name: "Black Pen", price: 1.50, image: "./images (2).jpeg" },
+                { name: "Blue Pen", price: 1.50, image: "./images (1).jpeg" },
+                { name: "Red Pen", price: 1.50, image: "./images.jpeg" },
+                { name: "Eraser", price: 0.80, image: "./download.jpeg" },
+                { name: "Sharpener", price: 1.00, image: "./images (3).jpeg" },
+                { name: "Ruler", price: 1.20, image: "./images (4).jpeg" },
+                { name: "Whiteboard Marker", price: 2.00, image: "./images (5).jpeg" }
             ],
             rent: [
-                { name: "Scientific Calculator (Rent)", price: 3.00, image: "https://images.unsplash.com/photo-1611125832047-1d7ad1e8e48b?auto=format&fit=crop&w=300&q=80" },
-                { name: "Chromebook Charger (Rent)", price: 2.50, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=300&q=80" },
-                { name: "Mouse/Keyboard Set (Rent)", price: 4.00, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=300&q=80" }
+                { name: "Scientific Calculator (Rent)", price: 3.00, image: "./images (6).jpeg" },
+                { name: "Chromebook Charger (Rent)", price: 2.50, image: "./images (7).jpeg" },
+                { name: "Mouse/Keyboard Set (Rent)", price: 4.00, image: "./images (8).jpeg" }
             ],
             snacks: [
-                { name: "Chips", price: 2.50, image: "https://images.unsplash.com/photo-1566478989037-eec170784d0b?auto=format&fit=crop&w=300&q=80" },
-                { name: "Chocolate Bar", price: 2.00, image: "https://images.unsplash.com/photo-1582176604856-e822b3113115?auto=format&fit=crop&w=300&q=80" },
-                { name: "Juice Box", price: 2.20, image: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=300&q=80" },
-                { name: "Muesli Bar", price: 1.80, image: "https://images.unsplash.com/photo-1622484210800-88094894372f?auto=format&fit=crop&w=300&q=80" }
+                { name: "Orange Juice Box", price: 2.20, image: "./images (9).jpeg" },
+                { name: "Apple Juice Box", price: 2.20, image: "./images (10).jpeg" },
+                { name: "Muesli Bar", price: 1.80, image: "./images (11).jpeg" }
             ]
         };
 
@@ -952,7 +950,6 @@
             }
         }
 
-        /* Shop rendering */
         function renderShop() {
             const stationeryGrid = document.getElementById('stationeryGrid');
             const rentGrid = document.getElementById('rentGrid');
@@ -974,7 +971,6 @@
             `;
         }
 
-        /* Cart logic */
         function getCart() {
             const cart = localStorage.getItem('supplycollectCart');
             return cart ? JSON.parse(cart) : [];
@@ -984,7 +980,6 @@
             localStorage.setItem('supplycollectCart', JSON.stringify(cart));
         }
 
-        /* Toast notifications */
         let toastTimeout;
 
         function showToast(message) {
@@ -1068,7 +1063,6 @@
             renderCart();
         }
 
-        /* Checkout Stage Logic */
         let selectedBlock = null;
         let selectedRoom = null;
 
@@ -1132,11 +1126,9 @@
         function placeOrder() {
             if (!selectedRoom) return;
 
-            // Clear Cart
             saveCart([]);
             updateNav();
 
-            // Display confirmation screen
             document.getElementById('checkoutForm').style.display = 'none';
             document.getElementById('orderConfirmText').textContent = `Your order is ready for pickup at Block ${selectedBlock}, Room ${selectedRoom}!`;
             document.getElementById('orderConfirmBox').style.display = 'block';
@@ -1147,7 +1139,6 @@
             openPage('shop');
         }
 
-        // Initialize App State
         updateNav();
     </script>
 </body>
