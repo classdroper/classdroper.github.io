@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupplyCollect - Shop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a class="logo" href="index.html">SupplyCollect</a>
+        <div class="nav-buttons" id="navButtons"></div>
+    </nav>
 
+    <div class="shop-content">
+        <h2 style="color:var(--text-main); font-size:2.25rem; font-weight:800; margin-top:20px;">Shop</h2>
+
+        <div class="shop-section-title">Stationery</div>
+        <div class="product-grid" id="stationeryGrid"></div>
+
+        <div class="shop-section-title">Rentals</div>
+        <div class="product-grid" id="rentGrid"></div>
+
+        <div class="shop-section-title">Snacks</div>
+        <div class="product-grid" id="snacksGrid"></div>
+    </div>
+
+    <div class="toast" id="toast"><span class="toast-check">&#10003;</span><span id="toastMessage"></span></div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", renderShop);
+    </script>
+</body>
+</html>
