@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupplyCollect - Account</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="fullpage-top">
+        <a href="index.html" class="back-btn">&larr; Back to home</a>
+    </div>
+    <div class="fullpage-content">
+        <h2>Account Details</h2>
 
+        <div class="account-section">
+            <label>Full Name</label>
+            <input type="text" id="accountName">
+            <div class="success-text" id="nameSuccess"></div>
+            <button class="submit-btn" onclick="updateName()">Update Name</button>
+        </div>
+
+        <div class="account-section">
+            <label>Email</label>
+            <input type="email" id="accountEmail" disabled>
+        </div>
+
+        <div class="account-section">
+            <label>New Password</label>
+            <input type="password" id="accountPassword" placeholder="Enter new password">
+            <div class="success-text" id="passwordSuccess"></div>
+            <button class="submit-btn" onclick="updatePassword()">Update Password</button>
+        </div>
+
+        <button class="signout-btn" onclick="signOutAndRedirect()">Sign Out</button>
+        <button class="delete-btn" onclick="openDeleteConfirm()">Delete Account</button>
+    </div>
+
+    <div class="confirm-overlay" id="deleteConfirm">
+        <div class="confirm-box">
+            <p>Are you sure you want to delete your account?</p>
+            <div class="confirm-buttons">
+                <button class="confirm-cancel" onclick="closeDeleteConfirm()">Cancel</button>
+                <button class="confirm-delete" onclick="deleteAccount()">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", loadAccountDetails);
+    </script>
+</body>
+</html>
