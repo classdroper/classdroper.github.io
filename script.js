@@ -1,22 +1,22 @@
 const products = {
     stationery: [
-        { name: "Black Pen", price: 1.50, prepTime: 2, image: "./images (2).jpeg" },
-        { name: "Blue Pen", price: 1.50, prepTime: 2, image: "./images (1).jpeg" },
-        { name: "Red Pen", price: 1.50, prepTime: 2, image: "./images.jpeg" },
-        { name: "Eraser", price: 0.80, prepTime: 2, image: "./download.jpeg" },
-        { name: "Sharpener", price: 1.00, prepTime: 3, image: "./images (3).jpeg" },
-        { name: "Ruler", price: 1.20, prepTime: 3, image: "./images (4).jpeg" },
-        { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "./images (5).jpeg" }
+        { name: "Black Pen", price: 1.50, prepTime: 2, image: "https://images.unsplash.com/photo-1585336261026-8f5786392b6e?w=300&auto=format&fit=crop" },
+        { name: "Blue Pen", price: 1.50, prepTime: 2, image: "https://images.unsplash.com/photo-1569025690938-a00729c9e1f9?w=300&auto=format&fit=crop" },
+        { name: "Red Pen", price: 1.50, prepTime: 2, image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=300&auto=format&fit=crop" },
+        { name: "Eraser", price: 0.80, prepTime: 2, image: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?w=300&auto=format&fit=crop" },
+        { name: "Sharpener", price: 1.00, prepTime: 3, image: "https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=300&auto=format&fit=crop" },
+        { name: "Ruler", price: 1.20, prepTime: 3, image: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=300&auto=format&fit=crop" },
+        { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "https://images.unsplash.com/photo-1569025690938-a00729c9e1f9?w=300&auto=format&fit=crop" }
     ],
     rent: [
-        { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "./images (6).jpeg" },
-        { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "./images (7).jpeg" },
-        { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "./images (8).jpeg" }
+        { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=300&auto=format&fit=crop" },
+        { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=300&auto=format&fit=crop" },
+        { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=300&auto=format&fit=crop" }
     ],
     snacks: [
-        { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "./images (9).jpeg" },
-        { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "./images (10).jpeg" },
-        { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "./images (11).jpeg" }
+        { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=300&auto=format&fit=crop" },
+        { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "https://images.unsplash.com/photo-1576673442511-7e09c774d9ece?w=300&auto=format&fit=crop" },
+        { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "https://images.unsplash.com/photo-1622484210800-88510891fe97?w=300&auto=format&fit=crop" }
     ]
 };
 
