@@ -1,22 +1,22 @@
 const products = {
     stationery: [
-        { name: "Black Pen", price: 1.50, prepTime: 2, image: "./images (2).jpeg" },
-        { name: "Blue Pen", price: 1.50, prepTime: 2, image: "./images (1).jpeg" },
-        { name: "Red Pen", price: 1.50, prepTime: 2, image: "./images.jpeg" },
-        { name: "Eraser", price: 0.80, prepTime: 2, image: "./download.jpeg" },
-        { name: "Sharpener", price: 1.00, prepTime: 3, image: "./images (3).jpeg" },
-        { name: "Ruler", price: 1.20, prepTime: 3, image: "./images (4).jpeg" },
-        { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "./images (5).jpeg" }
+        { name: "Black Pen", price: 1.50, prepTime: 2, image: "https://m.media-amazon.com/images/I/5115BzYVrFL.jpg" },
+        { name: "Blue Pen", price: 1.50, prepTime: 2, image: "https://www.officechoice.com.au/Images/ProductImages/1623967.jpg" },
+        { name: "Red Pen", price: 1.50, prepTime: 2, image: "https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/JPEG_1000x1000/ST430MA2RD_B_staedtler_430_medium_ballpoint_pen_red.jpg" },
+        { name: "Eraser", price: 0.80, prepTime: 2, image: "https://www.jerrysartarama.com/media/catalog/product/cache/1ed84fc5c90a0b69e5179e47db6d0739/s/t/staedtler-mars-plastic-eraser-main.jpg" },
+        { name: "Sharpener", price: 1.00, prepTime: 3, image: "https://cleverpatch.com.au/Images/ProductImages/500/20137.jpg" },
+        { name: "Ruler", price: 1.20, prepTime: 3, image: "https://www.cavalierart.com.au/wp-content/uploads/2012/02/marbig-ruler30-600x396.jpg" },
+        { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "https://zartart.com.au/cdn/shop/files/staedtler-whiteboard-markers-default-title-staedtler-whiteboard-markers-black-pack-of-32-47606594076947.jpg?v=1727185490&width=1214" }
     ],
     rent: [
-        { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "./images (6).jpeg" },
-        { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "./images (7).jpeg" },
-        { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "./images (8).jpeg" }
+        { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/JPEG_1000x1000/TETI30XBI_texas_instruments_scientific_calculator_ti_30xb_multiview.jpg" },
+        { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "https://www.laptopplus.com.au/images/thumbs/0007456_hp-usb-type-c-adapter-charger-45w-pn-1588-3008-1he07ut_600.jpeg" },
+        { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "https://m.media-amazon.com/images/I/61QkFTaSnFL.jpg" }
     ],
     snacks: [
-        { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "./images (9).jpeg" },
-        { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "./images (10).jpeg" },
-        { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "./images (11).jpeg" }
+        { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "https://c8.alamy.com/comp/ABT6WA/generic-juice-box-ABT6WA.jpg" },
+        { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "https://www.bigw.com.au/medias/sys_master/images/images/h62/h59/118838572253214.jpg" },
+        { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "https://www.uncletobys.com.au/sites/default/files/2024-06/Classic_Muesli_Bars-Choc_Chip-Flair_1-updated-u.png" }
     ]
 };
 
