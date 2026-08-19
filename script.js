@@ -1,113 +1,21 @@
-// Creates a browser-safe SVG data URL
-function makeProductImage(background, emoji) {
-    const svg = `
-        <svg xmlns="http://www.w3.org/2000/svg"
-             width="200"
-             height="150"
-             viewBox="0 0 200 150">
-            
-            <rect width="200" height="150"
-                  rx="16"
-                  fill="${background}"/>
-            
-            <text x="100"
-                  y="85"
-                  text-anchor="middle"
-                  font-size="70"
-                  dominant-baseline="middle">
-                ${emoji}
-            </text>
-        </svg>
-    `;
-
-    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-}
-
 const products = {
     stationery: [
-        {
-            name: "Black Pen",
-            price: 1.50,
-            prepTime: 2,
-            image: makeProductImage("#1e293b", "🖊️")
-        },
-        {
-            name: "Blue Pen",
-            price: 1.50,
-            prepTime: 2,
-            image: makeProductImage("#1e3a8a", "🖊️")
-        },
-        {
-            name: "Red Pen",
-            price: 1.50,
-            prepTime: 2,
-            image: makeProductImage("#991b1b", "🖊️")
-        },
-        {
-            name: "Eraser",
-            price: 0.80,
-            prepTime: 2,
-            image: makeProductImage("#f43f5e", "🧹")
-        },
-        {
-            name: "Sharpener",
-            price: 1.00,
-            prepTime: 3,
-            image: makeProductImage("#0284c7", "✏️")
-        },
-        {
-            name: "Ruler",
-            price: 1.20,
-            prepTime: 3,
-            image: makeProductImage("#d97706", "📏")
-        },
-        {
-            name: "Whiteboard Marker",
-            price: 2.00,
-            prepTime: 3,
-            image: makeProductImage("#334155", "🖍️")
-        }
+        { name: "Black Pen", price: 1.50, prepTime: 2, image: "https://placehold.co/300x300/1e293b/ffffff?text=Black+Pen" },
+        { name: "Blue Pen", price: 1.50, prepTime: 2, image: "https://placehold.co/300x300/1e3a8a/ffffff?text=Blue+Pen" },
+        { name: "Red Pen", price: 1.50, prepTime: 2, image: "https://placehold.co/300x300/991b1b/ffffff?text=Red+Pen" },
+        { name: "Eraser", price: 0.80, prepTime: 2, image: "https://placehold.co/300x300/f43f5e/ffffff?text=Eraser" },
+        { name: "Sharpener", price: 1.00, prepTime: 3, image: "https://placehold.co/300x300/0284c7/ffffff?text=Sharpener" },
+        { name: "Ruler", price: 1.20, prepTime: 3, image: "https://placehold.co/300x300/d97706/ffffff?text=Ruler" },
+        { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "https://placehold.co/300x300/334155/ffffff?text=Marker" }
     ],
-
     rent: [
-        {
-            name: "Scientific Calculator (Rent)",
-            price: 3.00,
-            prepTime: 8,
-            image: makeProductImage("#0f172a", "🔢")
-        },
-        {
-            name: "Chromebook Charger (Rent)",
-            price: 2.50,
-            prepTime: 6,
-            image: makeProductImage("#1e293b", "🔌")
-        },
-        {
-            name: "Mouse/Keyboard Set (Rent)",
-            price: 4.00,
-            prepTime: 10,
-            image: makeProductImage("#334155", "⌨️")
-        }
+        { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "https://placehold.co/300x300/0f172a/ffffff?text=Calculator" },
+        { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "https://placehold.co/300x300/1e293b/ffffff?text=Charger" },
+        { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "https://placehold.co/300x300/334155/ffffff?text=Mouse+Keyboard" }
     ],
-
     snacks: [
-        {
-            name: "Orange Juice Box",
-            price: 2.20,
-            prepTime: 4,
-            image: makeProductImage("#ea580c", "🧃")
-        },
-        {
-            name: "Apple Juice Box",
-            price: 2.20,
-            prepTime: 4,
-            image: makeProductImage("#65a30d", "🧃")
-        },
-        {
-            name: "Muesli Bar",
-            price: 1.80,
-            prepTime: 3,
-            image: makeProductImage("#b45309", "🍫")
-        }
+        { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "https://placehold.co/300x300/ea580c/ffffff?text=Orange+Juice" },
+        { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "https://placehold.co/300x300/65a30d/ffffff?text=Apple+Juice" },
+        { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "https://placehold.co/300x300/b45309/ffffff?text=Muesli+Bar" }
     ]
 };
