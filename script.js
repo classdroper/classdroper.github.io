@@ -1,22 +1,22 @@
 const products = {
     stationery: [
-        { name: "Black Pen", price: 1.50, prepTime: 2, image: "https://m.media-amazon.com/images/I/5115BzYVrFL.jpg" },
-        { name: "Blue Pen", price: 1.50, prepTime: 2, image: "https://www.officechoice.com.au/Images/ProductImages/1623967.jpg" },
-        { name: "Red Pen", price: 1.50, prepTime: 2, image: "https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/JPEG_1000x1000/ST430MA2RD_B_staedtler_430_medium_ballpoint_pen_red.jpg" },
-        { name: "Eraser", price: 0.80, prepTime: 2, image: "https://www.jerrysartarama.com/media/catalog/product/cache/1ed84fc5c90a0b69e5179e47db6d0739/s/t/staedtler-mars-plastic-eraser-main.jpg" },
-        { name: "Sharpener", price: 1.00, prepTime: 3, image: "https://cleverpatch.com.au/Images/ProductImages/500/20137.jpg" },
-        { name: "Ruler", price: 1.20, prepTime: 3, image: "https://www.cavalierart.com.au/wp-content/uploads/2012/02/marbig-ruler30-600x396.jpg" },
-        { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "https://zartart.com.au/cdn/shop/files/staedtler-whiteboard-markers-default-title-staedtler-whiteboard-markers-black-pack-of-32-47606594076947.jpg?v=1727185490&width=1214" }
+        { name: "Black Pen", price: 1.50, prepTime: 2, image: "https://images.unsplash.com/photo-1585336261026-8f5786372966?w=500&auto=format&fit=crop&q=60" },
+        { name: "Blue Pen", price: 1.50, prepTime: 2, image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=500&auto=format&fit=crop&q=60" },
+        { name: "Red Pen", price: 1.50, prepTime: 2, image: "https://images.unsplash.com/photo-1569172122301-bc5008bc09c5?w=500&auto=format&fit=crop&q=60" },
+        { name: "Eraser", price: 0.80, prepTime: 2, image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60" },
+        { name: "Sharpener", price: 1.00, prepTime: 3, image: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=500&auto=format&fit=crop&q=60" },
+        { name: "Ruler", price: 1.20, prepTime: 3, image: "https://images.unsplash.com/photo-1583225214464-9296029427aa?w=500&auto=format&fit=crop&q=60" },
+        { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?w=500&auto=format&fit=crop&q=60" }
     ],
     rent: [
-        { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/JPEG_1000x1000/TETI30XBI_texas_instruments_scientific_calculator_ti_30xb_multiview.jpg" },
-        { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "https://www.laptopplus.com.au/images/thumbs/0007456_hp-usb-type-c-adapter-charger-45w-pn-1588-3008-1he07ut_600.jpeg" },
-        { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "https://m.media-amazon.com/images/I/61QkFTaSnFL.jpg" }
+        { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "https://images.unsplash.com/photo-1594980596870-8aa52a78d8cd?w=500&auto=format&fit=crop&q=60" },
+        { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500&auto=format&fit=crop&q=60" },
+        { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&auto=format&fit=crop&q=60" }
     ],
     snacks: [
-        { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "https://c8.alamy.com/comp/ABT6WA/generic-juice-box-ABT6WA.jpg" },
-        { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "https://www.bigw.com.au/medias/sys_master/images/images/h62/h59/118838572253214.jpg" },
-        { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "https://www.uncletobys.com.au/sites/default/files/2024-06/Classic_Muesli_Bars-Choc_Chip-Flair_1-updated-u.png" }
+        { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=500&auto=format&fit=crop&q=60" },
+        { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=500&auto=format&fit=crop&q=60" },
+        { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "https://images.unsplash.com/photo-1622484210800-41050b16869a?w=500&auto=format&fit=crop&q=60" }
     ]
 };
 
