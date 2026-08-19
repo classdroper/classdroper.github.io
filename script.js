@@ -1,22 +1,22 @@
 const products = {
     stationery: [
-        { name: "Black Pen", price: 1.50, prepTime: 2, image: "https://images.unsplash.com/photo-1585336261026-8f5786372966?w=500&auto=format&fit=crop&q=60" },
-        { name: "Blue Pen", price: 1.50, prepTime: 2, image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=500&auto=format&fit=crop&q=60" },
-        { name: "Red Pen", price: 1.50, prepTime: 2, image: "https://images.unsplash.com/photo-1569172122301-bc5008bc09c5?w=500&auto=format&fit=crop&q=60" },
-        { name: "Eraser", price: 0.80, prepTime: 2, image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=60" },
-        { name: "Sharpener", price: 1.00, prepTime: 3, image: "https://images.unsplash.com/photo-1588072432836-e10032774350?w=500&auto=format&fit=crop&q=60" },
-        { name: "Ruler", price: 1.20, prepTime: 3, image: "https://images.unsplash.com/photo-1583225214464-9296029427aa?w=500&auto=format&fit=crop&q=60" },
-        { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "https://images.unsplash.com/photo-1628155930542-3c7a64e2c833?w=500&auto=format&fit=crop&q=60" }
+        { name: "Black Pen", price: 1.50, prepTime: 2, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/BIC_cristal_pen.jpg/640px-BIC_cristal_pen.jpg" },
+        { name: "Blue Pen", price: 1.50, prepTime: 2, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Blue_ballpoint_pen.jpg/640px-Blue_ballpoint_pen.jpg" },
+        { name: "Red Pen", price: 1.50, prepTime: 2, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Red_ballpoint_pen_01.jpg/640px-Red_ballpoint_pen_01.jpg" },
+        { name: "Eraser", price: 0.80, prepTime: 2, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Stypen_Eraser.jpg/640px-Stypen_Eraser.jpg" },
+        { name: "Sharpener", price: 1.00, prepTime: 3, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Pencil_sharpener_2006.jpg/640px-Pencil_sharpener_2006.jpg" },
+        { name: "Ruler", price: 1.20, prepTime: 3, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/30cm_ruler_plastic.jpg/640px-30cm_ruler_plastic.jpg" },
+        { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Whiteboard_markers.jpg/640px-Whiteboard_markers.jpg" }
     ],
     rent: [
-        { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "https://images.unsplash.com/photo-1594980596870-8aa52a78d8cd?w=500&auto=format&fit=crop&q=60" },
-        { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=500&auto=format&fit=crop&q=60" },
-        { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=500&auto=format&fit=crop&q=60" }
+        { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Texas_Instruments_TI-30X_IIS_calculator.jpg/640px-Texas_Instruments_TI-30X_IIS_calculator.jpg" },
+        { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Laptop_AC_adapter.jpg/640px-Laptop_AC_adapter.jpg" },
+        { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Logitech_MK270_keyboard_and_mouse.jpg/640px-Logitech_MK270_keyboard_and_mouse.jpg" }
     ],
     snacks: [
-        { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=500&auto=format&fit=crop&q=60" },
-        { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "https://images.unsplash.com/photo-1560806887-1e4cd0b6cbd6?w=500&auto=format&fit=crop&q=60" },
-        { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "https://images.unsplash.com/photo-1622484210800-41050b16869a?w=500&auto=format&fit=crop&q=60" }
+        { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Juice_box_orange.jpg/640px-Juice_box_orange.jpg" },
+        { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Apple_juice_box.jpg/640px-Apple_juice_box.jpg" },
+        { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Nature_Valley_Oats_%27n_Honey_Granola_Bar.jpg/640px-Nature_Valley_Oats_%27n_Honey_Granola_Bar.jpg" }
     ]
 };
 
@@ -204,7 +204,7 @@ function productCard(product, category, index) {
     return `
         <div class="product-card">
             <div>
-                <img class="product-image" src="${product.image}" alt="${product.name}">
+                <img class="product-image" src="${product.image}" alt="${product.name}" referrerpolicy="no-referrer">
                 <div class="product-name">${product.name}</div>
                 <div class="product-time">⏱ Approx ${product.prepTime} mins</div>
             </div>
@@ -256,7 +256,7 @@ function renderCart() {
 
     container.innerHTML = cart.map((item, i) => `
         <div class="cart-item">
-            <img class="cart-item-img" src="${item.image}" alt="${item.name}">
+            <img class="cart-item-img" src="${item.image}" alt="${item.name}" referrerpolicy="no-referrer">
             <div class="cart-item-info">
                 <div class="cart-item-name">${item.name}</div>
                 <div class="cart-item-price">$${item.price.toFixed(2)}</div>
