@@ -1,1 +1,26 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupplyCollect - Cart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="fullpage-top">
+        <a href="shop.html" class="back-btn">&larr; Back to shop</a>
+    </div>
+    <div class="cart-content">
+        <h2 style="color:var(--text-main); font-size:2rem; font-weight:700; margin-top:0; margin-bottom:20px;">Your Cart</h2>
+        <div id="cartItemsContainer"></div>
+        <div id="cartTotalContainer"></div>
+        <a href="checkout.html" style="text-decoration:none;">
+            <button class="submit-btn" id="checkoutBtn" style="margin-top:24px;">Checkout</button>
+        </a>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", renderCart);
+    </script>
+</body>
+</html>
