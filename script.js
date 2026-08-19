@@ -1,22 +1,22 @@
 const products = {
     stationery: [
-        { name: "Black Pen", price: 1.50, prepTime: 2, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/BIC_cristal_pen.jpg/640px-BIC_cristal_pen.jpg" },
-        { name: "Blue Pen", price: 1.50, prepTime: 2, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Blue_ballpoint_pen.jpg/640px-Blue_ballpoint_pen.jpg" },
-        { name: "Red Pen", price: 1.50, prepTime: 2, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Red_ballpoint_pen_01.jpg/640px-Red_ballpoint_pen_01.jpg" },
-        { name: "Eraser", price: 0.80, prepTime: 2, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Stypen_Eraser.jpg/640px-Stypen_Eraser.jpg" },
-        { name: "Sharpener", price: 1.00, prepTime: 3, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Pencil_sharpener_2006.jpg/640px-Pencil_sharpener_2006.jpg" },
-        { name: "Ruler", price: 1.20, prepTime: 3, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/30cm_ruler_plastic.jpg/640px-30cm_ruler_plastic.jpg" },
-        { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Whiteboard_markers.jpg/640px-Whiteboard_markers.jpg" }
+        { name: "Black Pen", price: 1.50, prepTime: 2, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e293b' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>🖊️</text></svg>" },
+        { name: "Blue Pen", price: 1.50, prepTime: 2, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e3a8a' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>🖊️</text></svg>" },
+        { name: "Red Pen", price: 1.50, prepTime: 2, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23991b1b' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>🖊️</text></svg>" },
+        { name: "Eraser", price: 0.80, prepTime: 2, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23f43f5e' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>🧹</text></svg>" },
+        { name: "Sharpener", price: 1.00, prepTime: 3, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230284c7' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>✏️</text></svg>" },
+        { name: "Ruler", price: 1.20, prepTime: 3, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23d97706' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>📏</text></svg>" },
+        { name: "Whiteboard Marker", price: 2.00, prepTime: 3, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23334155' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>🖍️</text></svg>" }
     ],
     rent: [
-        { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Texas_Instruments_TI-30X_IIS_calculator.jpg/640px-Texas_Instruments_TI-30X_IIS_calculator.jpg" },
-        { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Laptop_AC_adapter.jpg/640px-Laptop_AC_adapter.jpg" },
-        { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Logitech_MK270_keyboard_and_mouse.jpg/640px-Logitech_MK270_keyboard_and_mouse.jpg" }
+        { name: "Scientific Calculator (Rent)", price: 3.00, prepTime: 8, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230f172a' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>🔢</text></svg>" },
+        { name: "Chromebook Charger (Rent)", price: 2.50, prepTime: 6, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%231e293b' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>🔌</text></svg>" },
+        { name: "Mouse/Keyboard Set (Rent)", price: 4.00, prepTime: 10, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23334155' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>⌨️</text></svg>" }
     ],
     snacks: [
-        { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Juice_box_orange.jpg/640px-Juice_box_orange.jpg" },
-        { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fb/Apple_juice_box.jpg/640px-Apple_juice_box.jpg" },
-        { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Nature_Valley_Oats_%27n_Honey_Granola_Bar.jpg/640px-Nature_Valley_Oats_%27n_Honey_Granola_Bar.jpg" }
+        { name: "Orange Juice Box", price: 2.20, prepTime: 4, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23ea580c' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>🧃</text></svg>" },
+        { name: "Apple Juice Box", price: 2.20, prepTime: 4, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%2365a30d' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>🧃</text></svg>" },
+        { name: "Muesli Bar", price: 1.80, prepTime: 3, image: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23b45309' rx='12'/><text x='50%' y='50%' dominant-baseline='central' text-anchor='middle' font-size='48'>🍫</text></svg>" }
     ]
 };
 
@@ -204,7 +204,7 @@ function productCard(product, category, index) {
     return `
         <div class="product-card">
             <div>
-                <img class="product-image" src="${product.image}" alt="${product.name}" referrerpolicy="no-referrer">
+                <img class="product-image" src="${product.image}" alt="${product.name}">
                 <div class="product-name">${product.name}</div>
                 <div class="product-time">⏱ Approx ${product.prepTime} mins</div>
             </div>
@@ -256,7 +256,7 @@ function renderCart() {
 
     container.innerHTML = cart.map((item, i) => `
         <div class="cart-item">
-            <img class="cart-item-img" src="${item.image}" alt="${item.name}" referrerpolicy="no-referrer">
+            <img class="cart-item-img" src="${item.image}" alt="${item.name}">
             <div class="cart-item-info">
                 <div class="cart-item-name">${item.name}</div>
                 <div class="cart-item-price">$${item.price.toFixed(2)}</div>
