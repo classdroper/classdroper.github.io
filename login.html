@@ -1,1 +1,25 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupplyCollect - Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="fullpage-top">
+        <a href="index.html" class="back-btn">&larr; Back to home</a>
+    </div>
+    <div class="fullpage-content">
+        <h2>Login</h2>
+        <div class="error-text" id="loginError"></div>
+        <input type="email" id="loginEmail" placeholder="Email">
+        <input type="password" id="loginPassword" placeholder="Password">
+        <button class="submit-btn" onclick="logInAndRedirect()">Login</button>
+        <a href="signup.html" style="text-decoration:none;">
+            <button class="submit-btn" style="background-color:var(--accent-orange);">Sign Up Instead</button>
+        </a>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
